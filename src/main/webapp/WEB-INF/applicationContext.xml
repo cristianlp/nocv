@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+
+<beans>
+
+
+    <!-- WICKET -->
+
+	<bean id="wicketApplication" class="ar.com.imaginatic.nocv.web.view.NoCVApplication" /> 
+    
+    <!-- Hibernate SessionFactory -->
+
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+    
+        <property name="dataSource" ref="dataSource"/>
+        
+        <property name="mappingResources">
+        	<list>
+				<value>ar/com/imaginatic/nocv/domain/User.hbm.xml</value>
+			</list>
+        </property>
+        
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+                <prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
+            </props>
+        </property>
+        
+    </bean>
+    
+    <!-- Manejador de transacciones  -->
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory">
+			<ref local="sessionFactory" />
+		</property>
+	</bean>
+
+
+    <bean id="noCVService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+        <property name="transactionManager" ref="transactionManager"/>
+        <property name="target">
+            <bean class="ar.com.imaginatic.nocv.service.NoCVService">
+                <property name="dao" ref="noCvDao"/>
+            </bean>
+        </property>
+        <property name="transactionAttributes">
+            <props>
+                <prop key="save">PROPAGATION_REQUIRED</prop>
+                <prop key="update*">PROPAGATION_REQUIRED</prop>
+                <prop key="remove*">PROPAGATION_REQUIRED</prop>
+                <prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+            </props>
+        </property>
+    </bean>
+
+
+	<bean id="noCvDao" class="ar.com.imaginatic.nocv.persistence.dao.hibernate.NoCVDao">
+	
+        <property name="hibernateTemplate">
+            <bean class="org.springframework.orm.hibernate3.HibernateTemplate">
+                <property name="sessionFactory" ref="sessionFactory"/>
+                <property name="flushMode">
+                    <bean id="org.springframework.orm.hibernate3.HibernateAccessor.FLUSH_COMMIT"
+                        class="org.springframework.beans.factory.config.FieldRetrievingFactoryBean"/>
+                </property>
+            </bean>
+        </property>
+        
+    </bean>
+
+</beans>
