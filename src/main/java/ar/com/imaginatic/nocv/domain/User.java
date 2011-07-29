@@ -2,6 +2,17 @@ package ar.com.imaginatic.nocv.domain;
 
 public class User {
 
+	//FIXME ASIGNAR UN ID ARBITRARIO --> 4 TESTING
+	public User(String username) {
+		this.username = username;
+		this.oid = "10";
+	}
+	
+
+	public User() {
+		
+	}
+	
 	public String getOid() {
 		return oid;
 	}
