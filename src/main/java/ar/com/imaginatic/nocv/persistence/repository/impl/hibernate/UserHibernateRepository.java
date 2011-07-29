@@ -26,7 +26,7 @@ public class UserHibernateRepository implements I_UserRepository {
 
 	@Override
 	public User save(User user) {
-		// TODO Auto-generated method stub
+		System.out.println("insertando --> " + user.getUsername());
 		return null;
 	}
 
