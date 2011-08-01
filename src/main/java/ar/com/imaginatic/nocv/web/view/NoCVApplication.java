@@ -3,12 +3,16 @@ package ar.com.imaginatic.nocv.web.view;
 import javax.servlet.ServletContext;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Request;
+import org.apache.wicket.Response;
+import org.apache.wicket.Session;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import ar.com.imaginatic.nocv.service.NoCVService;
+import ar.com.imaginatic.nocv.web.view.pages.HomePage;
 
 
 
@@ -62,6 +66,10 @@ public class NoCVApplication extends WebApplication {
 	}
 
 	
+	public Session newSession(Request request, Response response) {
+        return new NoCVSession(request);
+    }
+
 
 	@Override
 	public Class<? extends Page> getHomePage() {

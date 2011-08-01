@@ -1,4 +1,4 @@
-package ar.com.imaginatic.nocv.web.view;
+package ar.com.imaginatic.nocv.web.view.pages;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import ar.com.imaginatic.nocv.service.NoCVService;
+import ar.com.imaginatic.nocv.web.view.NoCVApplication;
+import ar.com.imaginatic.nocv.web.view.NoCVSession;
 
 public abstract class BasePage extends WebPage {
 
@@ -25,5 +27,10 @@ public abstract class BasePage extends WebPage {
 	protected NoCVService getNoCVService() {
 		return NoCVApplication.get().getNoCVService();
 	}
+	
+	public NoCVSession getNoCVSession(){
+        return (NoCVSession)getSession();
+    }
+
 
 }

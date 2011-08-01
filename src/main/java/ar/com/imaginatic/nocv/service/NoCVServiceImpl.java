@@ -28,7 +28,7 @@ public class NoCVServiceImpl implements NoCVService{
 	public boolean saveUser(User user) {
 		//TODO chequear que no exista, etc, etc
 		
-		String oid = Constants.generateRamdomId();
+		String oid = Constants.getRamdomId();
 		user.setOid(oid);
 		
 		this.dao.saveUser(user);
@@ -40,6 +40,12 @@ public class NoCVServiceImpl implements NoCVService{
 
 	public List<User> findAllUsers() {
 		return this.dao.findAllUsers();
+	}
+
+	@Override
+	public User findUserById(String oid) {
+		
+		return this.getDao().findUserById(oid);
 	}
 	
 	

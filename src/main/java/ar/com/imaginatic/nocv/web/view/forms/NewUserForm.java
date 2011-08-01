@@ -4,24 +4,18 @@ import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.form.validation.EqualPasswordInputValidator;
 import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
-import org.apache.wicket.validation.validator.StringValidator;
 
 import ar.com.imaginatic.nocv.domain.User;
-import ar.com.imaginatic.nocv.web.view.BasePage;
-import ar.com.imaginatic.nocv.web.view.HomePage;
+import ar.com.imaginatic.nocv.web.view.NoCVSession;
+import ar.com.imaginatic.nocv.web.view.pages.BasePage;
+import ar.com.imaginatic.nocv.web.view.pages.HomePage;
 
 public class NewUserForm extends BasePage {
 
-/*	private String usernameForm;
-	private String nombreForm;
-	private String passwordForm;
-	private String passwordConfirmacionForm;*/
-	
-	
+
 	
 	public NewUserForm() {
 		initGui();
@@ -34,7 +28,6 @@ public class NewUserForm extends BasePage {
 
 					@Override
 					protected User load() {
-						System.out.println("loading new user");
 						return new User();
 					}
 				});
@@ -44,11 +37,12 @@ public class NewUserForm extends BasePage {
 			protected void onSubmit() {
 				User u = getModelObject();
 				
-				System.out.println("usuario -->" + u.getUsername());
-				
-				boolean b = getNoCVService().saveUser(u);
 				//FIXME
-				setResponsePage(HomePage.class);
+				boolean b = getNoCVService().saveUser(u);
+				
+				getNoCVSession().setUser(u);
+				
+				setResponsePage(UpdateNoCVProfileForm.class);
 			}
 
 		};

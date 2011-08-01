@@ -8,5 +8,6 @@ public interface NoCVService {
 
 	public boolean saveUser(User user);
 	public List<User> findAllUsers();
+	public User findUserById(String oid);
 	
 }

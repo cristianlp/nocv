@@ -1,4 +1,4 @@
-package ar.com.imaginatic.nocv.web.view;
+package ar.com.imaginatic.nocv.web.view.pages;
 
 
 

@@ -13,13 +13,19 @@ import ar.com.imaginatic.nocv.util.Constants;
 public class NoCV {
 
 	private String oid;
-	
+
 	private User user;
 
+	// Titulo mostrado en el listado de usuarios en la HomePage
+	private String titulo;
+
+	// Resumen (max X caracteres) que se muestra bajo el titulo descriptivo.
+	private String resumen;
 
 	// Funcionan como descriptores del perfil del usuario
 	private Set<Tag> tags;
 
+	// La disponibilidad horaria del usuario
 	private Constants.DisponibilidadHoraria disponibilidadHoraria;
 
 	// Info no publica para ser contactado
@@ -29,9 +35,8 @@ public class NoCV {
 	private boolean meInteresaParticiparEnProyectosLibres;
 	private String heTrabajadoCon;
 	private Constants.Roles_IT misRoles;
-
-	// Texto libre para agregar completar el perfil
-	private String resumen;
+	// Texto libre para completar el perfil
+	private String observaciones;
 
 	public NoCV() {
 		tags = new HashSet<Tag>();
@@ -110,6 +115,22 @@ public class NoCV {
 
 	public void setMisRoles(Constants.Roles_IT misRoles) {
 		this.misRoles = misRoles;
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
+
+	public String getObservaciones() {
+		return observaciones;
+	}
+
+	public void setObservaciones(String observaciones) {
+		this.observaciones = observaciones;
 	}
 
 }

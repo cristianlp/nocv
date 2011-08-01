@@ -12,7 +12,7 @@ public class Constants {
 		DESARROLLADOR, ARQUITECTO, ANALISTA_FUNCIONAL, TESTER, LIDER_PROYECTO, DBA, CONSULTOR 
 	}
 	
-	public static String generateRamdomId() {
+	public static String getRamdomId() {
 		return UUID.randomUUID().toString().replace("-", "");
 	}
 	

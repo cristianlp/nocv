@@ -1,4 +1,4 @@
-package ar.com.imaginatic.nocv.web.view;
+package ar.com.imaginatic.nocv.web.view.pages;
 
 import java.util.List;
 
@@ -12,17 +12,16 @@ import org.apache.wicket.model.LoadableDetachableModel;
 
 import ar.com.imaginatic.nocv.domain.User;
 
-public class HomePage extends BasePage {
+
+public class UsersPage extends BasePage {
 	
-	public HomePage() {
+	
+	public UsersPage() {
+		
 		initGui();
 	}
 
 	private void initGui() {
-		loadUsers();
-	}
-	
-	private void loadUsers() {
 		
 		IModel<List<User>> listModel = new LoadableDetachableModel<List<User>>() {
 			@Override
@@ -38,12 +37,13 @@ public class HomePage extends BasePage {
 				User u = item.getModelObject();
 				item.add(new Label("username", u.getUsername()));
 				
-				/*item.add(new BookmarkablePageLink<Void>("viewUserLink",
-						ViewUserPage.class, new PageParameters("user=" + u.getOid())));*/
+				item.add(new BookmarkablePageLink<Void>("viewUserLink",
+						ViewUserPage.class, new PageParameters("user=" + u.getOid())));
 			}
 		};
 		add(list);
-		
+	
 	}
+	
 
 }
