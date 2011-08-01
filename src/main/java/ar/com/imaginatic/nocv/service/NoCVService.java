@@ -1,17 +1,12 @@
 package ar.com.imaginatic.nocv.service;
 
-import ar.com.imaginatic.nocv.persistence.dao.hibernate.INoCVDao;
+import java.util.List;
 
-public class NoCVService {
+import ar.com.imaginatic.nocv.domain.User;
 
-	public INoCVDao getDao() {
-		return dao;
-	}
+public interface NoCVService {
 
-	public void setDao(INoCVDao dao) {
-		this.dao = dao;
-	}
-
-	private INoCVDao dao;
+	public boolean saveUser(User user);
+	public List<User> findAllUsers();
 	
 }

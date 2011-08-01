@@ -7,15 +7,31 @@
     </wicket:head>
 </head>
 <body>
+
+ 
 	<wicket:extend>
-		<h1 wicket:id="helloLabel"></h1>
-		<span wicket:id="currentTime"></span>
-		<br/>
-		<a href="#" wicket:id="usersLink">Usuarios</a>
-		<a href="#" wicket:id="newUserLink">Nuevo usuario</a>
-		
-		<br/>
-		
+	 <hr/>
+		<h2>Usuarios</h2>
+		<ul>
+		<div wicket:id="user" class="user">
+   
+    		<li>
+    			<img src="" /><label wicket:id="username"></label><br>
+    			(alta: XX/YY/AAAA - Visto: XX veces - Clicks: YY veces)<br>
+    			(resumen)<br>
+    			(Agregar)(tags: aa, bb, cc, dd)  (<a href="#">Ver perfil completo</a>)
+    		</li>
+    		 
+   
+   		</div>
+		</ul>
+
+ 	<hr/>	
+
 	</wicket:extend>
+
+
+
+
 </body>
 </html>

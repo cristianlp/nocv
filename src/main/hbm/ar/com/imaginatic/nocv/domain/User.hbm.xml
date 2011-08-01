@@ -6,15 +6,21 @@
 
 	
 
-	<class name="User" table="User">
+	<class name="User" table="USER">
 		<id name="oid" type="string" column="ID_USER" >
 			<generator class="assigned"></generator>
 		</id>
 
-		<property name="username" column="username" length="255" />		
-			
+		<property name="username" column="username" length="100" />	
+		<property name="nombre" column="nombre" length="100" />	
+		<property name="password" column="password" length="100" />	
+		
 	</class>
 
 
+
+    <query name="findAllUsers">
+        <![CDATA[from User u]]>
+  </query>
 
 </hibernate-mapping>

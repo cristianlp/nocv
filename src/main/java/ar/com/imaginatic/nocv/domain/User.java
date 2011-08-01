@@ -2,17 +2,21 @@ package ar.com.imaginatic.nocv.domain;
 
 public class User {
 
-	//FIXME ASIGNAR UN ID ARBITRARIO --> 4 TESTING
+	private String oid;
+
+	private String username;
+	private String nombre;
+	private String password;
+	private String passwordConfirmacion;
+
 	public User(String username) {
 		this.username = username;
-		this.oid = "10";
 	}
-	
 
 	public User() {
-		
+
 	}
-	
+
 	public String getOid() {
 		return oid;
 	}
@@ -29,14 +33,28 @@ public class User {
 		this.username = username;
 	}
 
-	private String oid;
-	
-	private String username;
-	private String nombre;
-	private String password;
-	
-	private NoCV cv;
-	
-	
-	
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getPasswordConfirmacion() {
+		return passwordConfirmacion;
+	}
+
+	public void setPasswordConfirmacion(String passwordConfirmacion) {
+		this.passwordConfirmacion = passwordConfirmacion;
+	}
+
 }

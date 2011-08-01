@@ -1,17 +1,16 @@
 package ar.com.imaginatic.nocv.web.view;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
+import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 import ar.com.imaginatic.nocv.domain.User;
-import ar.com.imaginatic.nocv.persistence.repository.impl.hibernate.UserHibernateRepository;
 
 
 public class UsersPage extends BasePage {
@@ -27,7 +26,7 @@ public class UsersPage extends BasePage {
 		IModel<List<User>> listModel = new LoadableDetachableModel<List<User>>() {
 			@Override
 			protected List<User> load() {
-				return new UserHibernateRepository().findAll();
+				return getNoCVService().findAllUsers();
 			}
 		};
 		
@@ -37,6 +36,9 @@ public class UsersPage extends BasePage {
 			protected void populateItem(final ListItem<User> item) {
 				User u = item.getModelObject();
 				item.add(new Label("username", u.getUsername()));
+				
+				item.add(new BookmarkablePageLink<Void>("viewUserLink",
+						ViewUserPage.class, new PageParameters("user=" + u.getOid())));
 			}
 		};
 		add(list);

@@ -3,42 +3,56 @@ package ar.com.imaginatic.nocv.domain;
 import java.util.HashSet;
 import java.util.Set;
 
+import ar.com.imaginatic.nocv.util.Constants;
+
+/*
+ * Las instancias de esta clase representan el perfil "liviano" (no formal) de un usuario (instancia de la clase User)
+ * 
+ * */
+
 public class NoCV {
 
-	private static enum DisponibilidadHoraria {
-		MENOS_10_HS_SEMANALES, ENTRE_10_20_HS_SEMANALES, MAS_DE_20_HS_SEMANALES
-	}
+	private String oid;
 	
-	//Funcionan como descriptores del perfil del usuario
+	private User user;
+
+
+	// Funcionan como descriptores del perfil del usuario
 	private Set<Tag> tags;
-	
-	
-	private DisponibilidadHoraria disponibilidadHoraria;
-	
-	//Info no publica para ser contactado
+
+	private Constants.DisponibilidadHoraria disponibilidadHoraria;
+
+	// Info no publica para ser contactado
 	private InfoContacto infoContacto;
-	
-	//Atributos opcionales
-	private String valorHora;
+
+	// Atributos opcionales
 	private boolean meInteresaParticiparEnProyectosLibres;
 	private String heTrabajadoCon;
-	private String quisieraTrabajarCon;
-	
-	//Texto libre para agregar info
-	private String descripcion;
+	private Constants.Roles_IT misRoles;
 
-	
+	// Texto libre para agregar completar el perfil
+	private String resumen;
+
 	public NoCV() {
 		tags = new HashSet<Tag>();
-		disponibilidadHoraria = DisponibilidadHoraria.ENTRE_10_20_HS_SEMANALES;
+		disponibilidadHoraria = Constants.DisponibilidadHoraria.ENTRE_10_20_HS_SEMANALES;
 	}
-	
-	public DisponibilidadHoraria getDisponibilidadHoraria() {
+
+	public Constants.DisponibilidadHoraria getDisponibilidadHoraria() {
 		return disponibilidadHoraria;
 	}
 
-	public void setDisponibilidadHoraria(DisponibilidadHoraria disponibilidadHoraria) {
+	public void setDisponibilidadHoraria(
+			Constants.DisponibilidadHoraria disponibilidadHoraria) {
 		this.disponibilidadHoraria = disponibilidadHoraria;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Set<Tag> getTags() {
@@ -49,21 +63,53 @@ public class NoCV {
 		this.tags = tags;
 	}
 
-	public String getValorHora() {
-		return valorHora;
+	public String getOid() {
+		return oid;
 	}
 
-	public void setValorHora(String valorHora) {
-		this.valorHora = valorHora;
+	public void setOid(String oid) {
+		this.oid = oid;
 	}
 
-	public String getDescripcion() {
-		return descripcion;
+	public InfoContacto getInfoContacto() {
+		return infoContacto;
 	}
 
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
+	public void setInfoContacto(InfoContacto infoContacto) {
+		this.infoContacto = infoContacto;
 	}
-	
-	
+
+	public boolean isMeInteresaParticiparEnProyectosLibres() {
+		return meInteresaParticiparEnProyectosLibres;
+	}
+
+	public void setMeInteresaParticiparEnProyectosLibres(
+			boolean meInteresaParticiparEnProyectosLibres) {
+		this.meInteresaParticiparEnProyectosLibres = meInteresaParticiparEnProyectosLibres;
+	}
+
+	public String getHeTrabajadoCon() {
+		return heTrabajadoCon;
+	}
+
+	public void setHeTrabajadoCon(String heTrabajadoCon) {
+		this.heTrabajadoCon = heTrabajadoCon;
+	}
+
+	public String getResumen() {
+		return resumen;
+	}
+
+	public void setResumen(String resumen) {
+		this.resumen = resumen;
+	}
+
+	public Constants.Roles_IT getMisRoles() {
+		return misRoles;
+	}
+
+	public void setMisRoles(Constants.Roles_IT misRoles) {
+		this.misRoles = misRoles;
+	}
+
 }
