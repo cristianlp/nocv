@@ -23,7 +23,7 @@
         <property name="mappingResources">
         	<list>
 				<value>ar/com/imaginatic/nocv/domain/User.hbm.xml</value>
-				<value>ar/com/imaginatic/nocv/domain/NoCV.hbm.xml</value>
+				<value>ar/com/imaginatic/nocv/domain/NoCVProfile.hbm.xml</value>
 			</list>
         </property>
         

@@ -16,6 +16,7 @@ public abstract class BasePage extends WebPage {
 
 	public BasePage() {
 		add(new HeaderPanel().setRenderBodyOnly(true));
+		add(new MenuPanel().setRenderBodyOnly(true));
 		add(new SidebarPanel().setRenderBodyOnly(true));
 		add(new FooterPanel().setRenderBodyOnly(true));
 	}

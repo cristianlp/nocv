@@ -1,5 +1,8 @@
 package ar.com.imaginatic.nocv.domain;
 
+
+//TODO COMPONER CON NOCV ???
+
 public class User {
 
 	private String oid;
