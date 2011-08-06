@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="ar.com.imaginatic.nocv.domain">
+
+	
+
+	<class name="NoCVProfile" table="NOCV">
+		<id name="oid" type="string" column="ID_NOCV" >
+			<generator class="assigned"></generator>
+		</id>
+
+		<property name="titulo" column="titulo" length="100" />
+		<property name="resumen" column="resumen" length="500" />	
+		
+		
+		<many-to-one name="user" class="User" column="USER_ID" not-null="true" cascade="all"/>
+			
+		<bag name="skills" table="NOCV_SKILL">
+        	<key column="ID_NOCV"/>
+        	<many-to-many column="ID_SKILL" class="Skill"/>
+    	</bag>
+			
+			
+	</class>
+
+
+
+</hibernate-mapping>

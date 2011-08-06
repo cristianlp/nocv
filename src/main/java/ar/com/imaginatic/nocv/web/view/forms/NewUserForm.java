@@ -8,39 +8,40 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import ar.com.imaginatic.nocv.domain.User;
-import ar.com.imaginatic.nocv.web.view.NoCVSession;
+import ar.com.imaginatic.nocv.web.dto.UserDTO;
 import ar.com.imaginatic.nocv.web.view.pages.BasePage;
-import ar.com.imaginatic.nocv.web.view.pages.HomePage;
 
-public class NewUserForm extends BasePage {
+public class NewUserForm extends BaseForm {
 
 
+	private BasePage noCVBasePage;
 	
-	public NewUserForm() {
+	public NewUserForm(String id, BasePage page) {
+		super(id);
+		this.noCVBasePage = page;
 		initGui();
 	}
 
 	private void initGui() {
 
-		IModel<User> model = new CompoundPropertyModel<User>(
-				new LoadableDetachableModel<User>() {
+		IModel<UserDTO> model = new CompoundPropertyModel<UserDTO>(
+				new LoadableDetachableModel<UserDTO>() {
 
 					@Override
-					protected User load() {
-						return new User();
+					protected UserDTO load() {
+						return new UserDTO();
 					}
 				});
 
-		Form<User> form = new Form<User>("newuser_form", model) {
+		Form<UserDTO> form = new Form<UserDTO>("newuser_form", model) {
 			@Override
 			protected void onSubmit() {
-				User u = getModelObject();
+				UserDTO u = getModelObject();
 				
-				//FIXME
-				boolean b = getNoCVService().saveUser(u);
+				//FIXME Enviar mensaje mayor granularidad (ej: getNoCVBasePage().addUser() )
+				boolean b = getNoCVBasePage().getNoCVService().addUser(u);
 				
-				getNoCVSession().setUser(u);
+				getNoCVBasePage().getNoCVSession().setUser(u);
 				
 				setResponsePage(UpdateNoCVProfileForm.class);
 			}
@@ -91,6 +92,10 @@ public class NewUserForm extends BasePage {
 		
 		
 
+	}
+
+	public BasePage getNoCVBasePage() {
+		return noCVBasePage;
 	}
 
 	

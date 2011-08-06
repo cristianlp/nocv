@@ -13,9 +13,9 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import ar.com.imaginatic.nocv.domain.NoCVProfile;
-import ar.com.imaginatic.nocv.domain.User;
 import ar.com.imaginatic.nocv.domain.types.DisponibilidadHoraria_Enum;
+import ar.com.imaginatic.nocv.web.dto.NoCVProfileDTO;
+import ar.com.imaginatic.nocv.web.dto.UserDTO;
 import ar.com.imaginatic.nocv.web.view.pages.BasePage;
 import ar.com.imaginatic.nocv.web.view.pages.HomePage;
 
@@ -34,32 +34,36 @@ public class UpdateNoCVProfileForm extends BasePage {
 
 	private void initGui(final String userId) {
 
-		IModel<NoCVProfile> model = new CompoundPropertyModel<NoCVProfile>(
-				new LoadableDetachableModel<NoCVProfile>() {
+		IModel<NoCVProfileDTO> model = new CompoundPropertyModel<NoCVProfileDTO>(
+				new LoadableDetachableModel<NoCVProfileDTO>() {
 
 					@Override
-					protected NoCVProfile load() {
-						return new NoCVProfile();
+					protected NoCVProfileDTO load() {
+						return new NoCVProfileDTO();
 					}
 				});
 
-		Form<NoCVProfile> form = new Form<NoCVProfile>("nocv_form", model) {
+		Form<NoCVProfileDTO> form = new Form<NoCVProfileDTO>("nocv_form", model) {
 
-			User user;
+			UserDTO user;
 
 			@Override
 			protected void onSubmit() {
-				NoCVProfile nocv = getModelObject();
+				NoCVProfileDTO nocv = getModelObject();
 
-				if (user != null)
-					user = getNoCVService().findUserById(userId);
+				if (userId != null)
+					user = getNoCVService().getUserById(userId);
 				else
 					user = getNoCVSession().getUser();
 
 				System.out.println("USUARIO -->" + user.getUsername());
 				
 				nocv.setUser(user);
-
+				
+				
+				
+				getNoCVService().addNoCVProfile(nocv);
+				
 				// FIXME
 				setResponsePage(HomePage.class);
 			}

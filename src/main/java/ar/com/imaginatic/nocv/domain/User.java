@@ -1,7 +1,9 @@
 package ar.com.imaginatic.nocv.domain;
 
-
-//TODO COMPONER CON NOCV ???
+/*
+ * Las instancias de esta clase representan los usuarios del sistema
+ * 
+ * */
 
 public class User {
 
@@ -12,9 +14,19 @@ public class User {
 	private String password;
 	private String passwordConfirmacion;
 
-	public User(String username) {
-		this.username = username;
+	private String email;
+
+	public User(String username, String password, String email) {
+		this(username, null, password, email);
 	}
+	
+	public User(String username, String nombre, String password, String email) {
+		this.username = username;
+		this.password = password;
+		this.email=email;
+	}
+	
+	
 
 	public User() {
 
@@ -58,6 +70,14 @@ public class User {
 
 	public void setPasswordConfirmacion(String passwordConfirmacion) {
 		this.passwordConfirmacion = passwordConfirmacion;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 }

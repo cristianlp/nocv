@@ -5,12 +5,12 @@ import java.io.Serializable;
 import org.apache.wicket.Request;
 import org.apache.wicket.protocol.http.WebSession;
 
-import ar.com.imaginatic.nocv.domain.User;
+import ar.com.imaginatic.nocv.web.dto.UserDTO;
 
 public class NoCVSession extends WebSession implements Serializable{
 
 	
-	private User user;
+	private UserDTO user;
 
 
 	private static final long serialVersionUID = 1L;
@@ -20,11 +20,11 @@ public class NoCVSession extends WebSession implements Serializable{
 	}
 
 	
-	public User getUser() {
+	public UserDTO getUser() {
 		return user;
 	}
 
-	public void setUser(User user) {
+	public void setUser(UserDTO user) {
 		this.user = user;
 	}
 

@@ -1,13 +1,20 @@
 package ar.com.imaginatic.nocv.service;
 
-import java.util.List;
+import java.util.Collection;
 
-import ar.com.imaginatic.nocv.domain.User;
+import ar.com.imaginatic.nocv.web.dto.NoCVProfileDTO;
+import ar.com.imaginatic.nocv.web.dto.UserDTO;
 
 public interface NoCVService {
 
-	public boolean saveUser(User user);
-	public List<User> findAllUsers();
-	public User findUserById(String oid);
+	
+	//USER
+	public boolean addUser(UserDTO user);
+	public Collection<UserDTO> getAllUsers();
+	public UserDTO getUserById(String oid);
+	
+	
+	//NOCVProfile
+	public boolean addNoCVProfile(NoCVProfileDTO noCV);
 	
 }

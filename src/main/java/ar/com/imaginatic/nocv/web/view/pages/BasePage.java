@@ -25,7 +25,7 @@ public abstract class BasePage extends WebPage {
 		super(parameters);
 	}
 
-	protected NoCVService getNoCVService() {
+	public NoCVService getNoCVService() {
 		return NoCVApplication.get().getNoCVService();
 	}
 	
