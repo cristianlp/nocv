@@ -41,7 +41,7 @@ public class ListUsersPage extends BasePage {
 				item.add(new Label("usernameLabel", u.getUsername()));
 				
 				Link<String> viewUserLink = new BookmarkablePageLink<String>(
-						"viewUserLink", ViewUserPage.class, new PageParameters("user=" + u.getOid()));
+						"viewUserLink", ViewUserPublicNoCVProfilePage.class, new PageParameters("user=" + u.getOid()));
 						
 				viewUserLink.add(new Label("viewUserLinkLabel", "Ver Perfil"));
 				item.add(viewUserLink);

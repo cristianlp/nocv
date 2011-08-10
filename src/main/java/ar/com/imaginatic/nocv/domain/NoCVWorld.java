@@ -25,9 +25,7 @@ public class NoCVWorld {
 		return instance;
 	}
 
-	public void addUser(String username, String nombre, String password, String email) {
-		
-		User user = new User(username, nombre, password, email);
+	public void addUser(User user) {
 		
 		this.getUsers().add(user);
 	}

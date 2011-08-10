@@ -2,25 +2,28 @@ package ar.com.imaginatic.nocv.web.dto;
 
 import java.util.Set;
 
+import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
+import ar.com.imaginatic.nocv.domain.NoCVType;
+import ar.com.imaginatic.nocv.domain.RoleIT;
 import ar.com.imaginatic.nocv.domain.Skill;
 import ar.com.imaginatic.nocv.domain.Ubicacion;
-import ar.com.imaginatic.nocv.domain.types.DisponibilidadHoraria_Enum;
-import ar.com.imaginatic.nocv.domain.types.NoCVProfile_Enum;
 
 public class NoCVProfileDTO {
 
 	private String oid;
-	
-	private UserDTO user;
 
 	private String titulo;
 	private String resumen;
-	private Set<Skill> skills;
+	private Set<SkillDTO> skills;
 
-	private DisponibilidadHoraria_Enum disponibilidadHorariaType;
-	private NoCVProfile_Enum noCVProfileType;
+	private DisponibilidadHorariaDTO disponibilidadHorariaType;
+	private NoCVType noCVProfileType;
+	private Set<RoleITDTO> rolesIT;
 
-	private Ubicacion ubicacion;
+	//UBICACION
+	private String pais;
+	private String ciudad;
+	private String observacionesUbicacion;
 
 	private String observaciones;
 
@@ -40,39 +43,6 @@ public class NoCVProfileDTO {
 		this.resumen = resumen;
 	}
 
-	public Set<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(Set<Skill> skills) {
-		this.skills = skills;
-	}
-
-	public DisponibilidadHoraria_Enum getDisponibilidadHorariaType() {
-		return disponibilidadHorariaType;
-	}
-
-	public void setDisponibilidadHorariaType(
-			DisponibilidadHoraria_Enum disponibilidadHorariaType) {
-		this.disponibilidadHorariaType = disponibilidadHorariaType;
-	}
-
-	public NoCVProfile_Enum getNoCVProfileType() {
-		return noCVProfileType;
-	}
-
-	public void setNoCVProfileType(NoCVProfile_Enum noCVProfileType) {
-		this.noCVProfileType = noCVProfileType;
-	}
-
-	public Ubicacion getUbicacion() {
-		return ubicacion;
-	}
-
-	public void setUbicacion(Ubicacion ubicacion) {
-		this.ubicacion = ubicacion;
-	}
-
 	public String getObservaciones() {
 		return observaciones;
 	}
@@ -81,20 +51,71 @@ public class NoCVProfileDTO {
 		this.observaciones = observaciones;
 	}
 
-	public UserDTO getUser() {
-		return user;
-	}
-
-	public void setUser(UserDTO user) {
-		this.user = user;
-	}
-
 	public String getOid() {
 		return oid;
 	}
 
 	public void setOid(String oid) {
 		this.oid = oid;
+	}
+
+	public DisponibilidadHorariaDTO getDisponibilidadHorariaType() {
+		return disponibilidadHorariaType;
+	}
+
+	public void setDisponibilidadHorariaType(
+			DisponibilidadHorariaDTO disponibilidadHorariaType) {
+		this.disponibilidadHorariaType = disponibilidadHorariaType;
+	}
+
+	public NoCVType getNoCVProfileType() {
+		return noCVProfileType;
+	}
+
+	public void setNoCVProfileType(NoCVType noCVProfileType) {
+		this.noCVProfileType = noCVProfileType;
+	}
+
+	public Set<SkillDTO> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Set<SkillDTO> skills) {
+		this.skills = skills;
+	}
+
+	public Set<RoleITDTO> getRolesIT() {
+		return rolesIT;
+	}
+
+	public void setRolesIT(Set<RoleITDTO> rolesIT) {
+		this.rolesIT = rolesIT;
+	}
+
+
+
+	public String getPais() {
+		return pais;
+	}
+
+	public void setPais(String pais) {
+		this.pais = pais;
+	}
+
+	public String getCiudad() {
+		return ciudad;
+	}
+
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
+	}
+
+	public String getObservacionesUbicacion() {
+		return observacionesUbicacion;
+	}
+
+	public void setObservacionesUbicacion(String observacionesUbicacion) {
+		this.observacionesUbicacion = observacionesUbicacion;
 	}
 
 }

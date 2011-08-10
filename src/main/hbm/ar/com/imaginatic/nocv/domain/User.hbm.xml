@@ -14,13 +14,18 @@
 		<property name="username" column="username" length="100" />	
 		<property name="nombre" column="nombre" length="100" />	
 		<property name="password" column="password" length="100" />	
+		<property name="email" column="email" length="100" />
+		<property name="activo" column="activo"  />
+		
+		<many-to-one name="noCVProfile" class="NoCVProfile" column="NOCV_ID" cascade="all"/>
+		
 		
 	</class>
 
 
 
-    <query name="findAllUsers">
-        <![CDATA[from User u]]>
-  </query>
+    <query name="findAllActiveUsers">
+        <![CDATA[from User u where u.activo=true]]>
+    </query>
 
 </hibernate-mapping>

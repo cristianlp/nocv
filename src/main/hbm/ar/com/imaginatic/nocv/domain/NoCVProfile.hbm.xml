@@ -4,25 +4,36 @@
 	"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="ar.com.imaginatic.nocv.domain">
 
-	
+
 
 	<class name="NoCVProfile" table="NOCV">
-		<id name="oid" type="string" column="ID_NOCV" >
+		<id name="oid" type="string" column="ID_NOCV">
 			<generator class="assigned"></generator>
 		</id>
 
 		<property name="titulo" column="titulo" length="100" />
-		<property name="resumen" column="resumen" length="500" />	
-		
-		
-		<many-to-one name="user" class="User" column="USER_ID" not-null="true" cascade="all"/>
-			
-		<bag name="skills" table="NOCV_SKILL">
-        	<key column="ID_NOCV"/>
-        	<many-to-many column="ID_SKILL" class="Skill"/>
-    	</bag>
-			
-			
+		<property name="resumen" column="resumen" length="500" />
+		<property name="observaciones" column="observaciones" length="500" />
+
+
+		<many-to-one name="ubicacion" class="Ubicacion" column="UBICACION_ID"
+			not-null="true" />
+
+		<many-to-one name="disponibilidadHorariaType" class="DisponibilidadHoraria"
+			column="DISPONIBILIDADHORARIA_ID" not-null="true" />
+		<many-to-one name="noCVType" class="NoCVType" column="NOCVTYPE_ID"
+			not-null="true" />
+
+		<!-- <bag name="rolesType" table="NOCV_ROLEIT" lazy="extra"> <key column="ID_NOCV"/> 
+			<many-to-many class="RoleIT"/> </bag> -->
+
+
+		<bag name="skills" table="SKILL" lazy="extra" cascade="all">
+			<key column="ID_NOCV" />
+			<one-to-many class="Skill" />
+		</bag>
+
+
 	</class>
 
 

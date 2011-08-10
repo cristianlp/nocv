@@ -1,12 +1,15 @@
 package ar.com.imaginatic.nocv.persistence.dao.hibernate;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
+import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVProfile;
 import ar.com.imaginatic.nocv.domain.NoCVWorld;
 import ar.com.imaginatic.nocv.domain.User;
+import ar.com.imaginatic.nocv.util.Constants;
 
 public class NoCVDao extends HibernateDaoSupport implements INoCVDao {
 
@@ -34,13 +37,18 @@ public class NoCVDao extends HibernateDaoSupport implements INoCVDao {
 	
 	// USER
 
-	public void saveUser(User user) {
+	public void saveUser(String username, String nombre, String password, String email, boolean activo) {
+		//NoCVWorld world = this.getNoCVWorld();
+		User user = new User(username, nombre, password, email, activo);
+		//world.addUser(user);
+		user.setOid(Constants.getRamdomId());
 		getHibernateTemplate().save(user);
+		
 	}
 
-	public List<User> findAllUsers() {
+	public List<User> findAllActiveUsers() {
 
-		List<User> l = getHibernateTemplate().findByNamedQuery("findAllUsers");
+		List<User> l = getHibernateTemplate().findByNamedQuery("findAllActiveUsers");
 
 		return l;
 
@@ -53,6 +61,15 @@ public class NoCVDao extends HibernateDaoSupport implements INoCVDao {
 
 	}
 
+	//OTROS
+	public List<DisponibilidadHoraria> findAllDisponibilidadHoraria() {
+		return getHibernateTemplate().findByNamedQuery("findAllDisponibilidadHoraria");
+	}
+	
+	public DisponibilidadHoraria findDisponibilidadHorariaById(String oid) {
+		return (DisponibilidadHoraria) getHibernateTemplate().get(DisponibilidadHoraria.class, oid);
+	}
+	
 	// ********************************************************************************************************
 
 	public void createSchema() {

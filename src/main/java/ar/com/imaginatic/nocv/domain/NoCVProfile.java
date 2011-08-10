@@ -1,12 +1,6 @@
 package ar.com.imaginatic.nocv.domain;
 
-import java.util.HashSet;
 import java.util.Set;
-
-import ar.com.imaginatic.nocv.domain.types.DisponibilidadHoraria_Enum;
-import ar.com.imaginatic.nocv.domain.types.NoCVProfile_Enum;
-import ar.com.imaginatic.nocv.domain.types.RolesIT_Enum;
-import ar.com.imaginatic.nocv.util.Constants;
 
 /*
  * Las instancias de esta clase representan el perfil "liviano" (no formal) de un usuario (instancia de la clase User)
@@ -16,8 +10,6 @@ import ar.com.imaginatic.nocv.util.Constants;
 public class NoCVProfile {
 
 	private String oid;
-
-	private User user;
 
 	// Titulo mostrado en el listado de usuarios en la HomePage
 	private String titulo;
@@ -29,10 +21,14 @@ public class NoCVProfile {
 	private Set<Skill> skills;
 
 	// La disponibilidad horaria del usuario
-	private DisponibilidadHoraria_Enum disponibilidadHorariaType;
+	// private DisponibilidadHoraria_Enum disponibilidadHorariaType;
+
+	private DisponibilidadHoraria disponibilidadHorariaType;
 
 	// Tipo del usuario: individual o empresa
-	private NoCVProfile_Enum noCVProfileType;
+	// private NoCVProfile_Enum noCVProfileType;
+
+	private NoCVType noCVType;
 
 	// Info no publica para ser contactado
 	private Ubicacion ubicacion;
@@ -40,23 +36,19 @@ public class NoCVProfile {
 	// Atributos opcionales
 	private boolean meInteresaParticiparEnProyectosLibres;
 	private String heTrabajadoCon;
-	private Set<RolesIT_Enum> rolesType;
+	// private Set<RoleIT> rolesType;
+
 	// Texto libre para completar el perfil
 	private String observaciones;
 
-	public NoCVProfile() {
-		skills = new HashSet<Skill>();
-		disponibilidadHorariaType = DisponibilidadHoraria_Enum.ENTRE_10_20_HS_SEMANALES;
-		noCVProfileType = NoCVProfile_Enum.INDIVIDUAL;
-		rolesType = new HashSet<RolesIT_Enum>();
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
+	// Se construye el objeto con los atributos obligatorios
+	public NoCVProfile(String titulo, String resumen, Ubicacion ubicacion,
+			DisponibilidadHoraria disponibilidadHoraria, Set<Skill> skills) {
+		this.skills = skills;
+		this.titulo = titulo;
+		this.resumen = resumen;
+		this.ubicacion = ubicacion;
+		this.disponibilidadHorariaType = disponibilidadHoraria;
 	}
 
 	public String getOid() {
@@ -120,37 +112,37 @@ public class NoCVProfile {
 		this.skills = skills;
 	}
 
-	public DisponibilidadHoraria_Enum getDisponibilidadHorariaType() {
-		return disponibilidadHorariaType;
-	}
-
-	public void setDisponibilidadHorariaType(
-			DisponibilidadHoraria_Enum disponibilidadHorariaType) {
-		this.disponibilidadHorariaType = disponibilidadHorariaType;
-	}
-
-	public NoCVProfile_Enum getNoCVProfileType() {
-		return noCVProfileType;
-	}
-
-	public void setNoCVProfileType(NoCVProfile_Enum noCVProfileType) {
-		this.noCVProfileType = noCVProfileType;
-	}
-
-	public Set<RolesIT_Enum> getRolesType() {
-		return rolesType;
-	}
-
-	public void setRolesType(Set<RolesIT_Enum> rolesType) {
-		this.rolesType = rolesType;
-	}
-
 	public Ubicacion getUbicacion() {
 		return ubicacion;
 	}
 
 	public void setUbicacion(Ubicacion ubicacion) {
 		this.ubicacion = ubicacion;
+	}
+
+	public DisponibilidadHoraria getDisponibilidadHorariaType() {
+		return disponibilidadHorariaType;
+	}
+
+	public void setDisponibilidadHorariaType(
+			DisponibilidadHoraria disponibilidadHorariaType) {
+		this.disponibilidadHorariaType = disponibilidadHorariaType;
+	}
+
+	public NoCVType getNoCVProfileType() {
+		return noCVType;
+	}
+
+	public void setNoCVProfileType(NoCVType noCVProfileType) {
+		this.noCVType = noCVProfileType;
+	}
+
+	public NoCVType getNoCVType() {
+		return noCVType;
+	}
+
+	public void setNoCVType(NoCVType noCVType) {
+		this.noCVType = noCVType;
 	}
 
 }

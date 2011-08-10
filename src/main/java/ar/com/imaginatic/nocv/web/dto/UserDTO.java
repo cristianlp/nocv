@@ -7,7 +7,10 @@ public class UserDTO {
 	private String username;
 	private String nombre;
 	private String password;
+	private String passwordConfirmation;
 	private String email;
+	
+	private NoCVProfileDTO noCVProfileDTO;
 
 	public UserDTO() {
 		this(null, null, null);
@@ -62,6 +65,22 @@ public class UserDTO {
 
 	public void setOid(String oid) {
 		this.oid = oid;
+	}
+
+	public NoCVProfileDTO getNoCVProfileDTO() {
+		return noCVProfileDTO;
+	}
+
+	public void setNoCVProfileDTO(NoCVProfileDTO noCVProfileDTO) {
+		this.noCVProfileDTO = noCVProfileDTO;
+	}
+
+	public String getPasswordConfirmation() {
+		return passwordConfirmation;
+	}
+
+	public void setPasswordConfirmation(String passwordConfirmation) {
+		this.passwordConfirmation = passwordConfirmation;
 	}
 
 }

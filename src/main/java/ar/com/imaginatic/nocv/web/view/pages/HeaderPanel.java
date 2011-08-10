@@ -3,9 +3,6 @@ package ar.com.imaginatic.nocv.web.view.pages;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
-import ar.com.imaginatic.nocv.web.view.forms.NewUserForm;
-import ar.com.imaginatic.nocv.web.view.forms.UpdateNoCVProfileForm;
-
 
 
 public class HeaderPanel extends BasePanel {
@@ -19,7 +16,7 @@ public class HeaderPanel extends BasePanel {
 
 	private void initGui() {
 		add(new BookmarkablePageLink("newUserLink", NewUserPage.class));
-		add(new BookmarkablePageLink("profileLink", UpdateNoCVProfileForm.class,  new PageParameters("user=1")));
+		add(new BookmarkablePageLink("profileLink", UpdateNoCVProfilePage.class,  new PageParameters("user=1")));
 
 	}
 		

@@ -2,15 +2,24 @@ package ar.com.imaginatic.nocv.service;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVProfile;
+import ar.com.imaginatic.nocv.domain.RoleIT;
+import ar.com.imaginatic.nocv.domain.Skill;
+import ar.com.imaginatic.nocv.domain.Ubicacion;
 import ar.com.imaginatic.nocv.domain.User;
 import ar.com.imaginatic.nocv.util.Constants;
+import ar.com.imaginatic.nocv.util.RoleITParser;
+import ar.com.imaginatic.nocv.util.SkillsParser;
 import ar.com.imaginatic.nocv.web.dto.DTOFactory;
+import ar.com.imaginatic.nocv.web.dto.DisponibilidadHorariaDTO;
 import ar.com.imaginatic.nocv.web.dto.NoCVProfileDTO;
+import ar.com.imaginatic.nocv.web.dto.NoCVPublicProfileDTO;
 import ar.com.imaginatic.nocv.web.dto.UserDTO;
 
 public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService {
@@ -24,10 +33,8 @@ public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService 
 
 		// Code Complete --> enviar la menor cantidad de datos --> menos
 		// acoplamiento
-		this.getDao()
-				.getNoCVWorld()
-				.addUser(userDTO.getUsername(), userDTO.getNombre(),
-						userDTO.getPassword(), userDTO.getEmail());
+		this.getDao().saveUser(userDTO.getUsername(), userDTO.getNombre(),
+				userDTO.getPassword(), userDTO.getEmail(), false);
 
 		// FIXME
 		return true;
@@ -35,35 +42,71 @@ public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService 
 	}
 
 	public Collection<UserDTO> getAllUsers() {
-		List<User> users = this.getDao().findAllUsers();
-		Collection <UserDTO> dtos = DTOFactory.createDTOForUsers(users);
-		
+		List<User> users = this.getDao().findAllActiveUsers();
+		Collection<UserDTO> dtos = DTOFactory.createDTOForUsers(users);
+
 		return dtos;
-		
+
 	}
 
 	@Override
 	public UserDTO getUserById(String oid) {
 
 		User user = this.getDao().findUserById(oid);
-		UserDTO dto = DTOFactory.createDTOForUser(user);
+
 		
+		//TODO CHEQUEAR NOCV != NULL
+		
+		UserDTO dto = DTOFactory.createDTOForUser(user);
+
 		return dto;
 	}
 
 	// NOCVProfile
 
-	public boolean addNoCVProfile(NoCVProfileDTO noCVDTO) {
+	public UserDTO addNoCVProfile(String userOid, NoCVProfileDTO noCVDTO) {
 
-		NoCVProfile noCV = this.getDao().findNoCVProfileById(noCVDTO.getOid());
+		User user = this.getDao().findUserById(userOid);
+
+		DisponibilidadHoraria dh = this.getDao().findDisponibilidadHorariaById(
+				noCVDTO.getDisponibilidadHorariaType().getOid());
+
+		Ubicacion ubicacion = new Ubicacion(noCVDTO.getPais(),
+				noCVDTO.getCiudad(), noCVDTO.getObservacionesUbicacion());
+		Set<Skill> skills = SkillsParser.parse(noCVDTO.getSkills());
+		//Set<RoleIT> roles = RoleITParser.parse(noCVDTO.getRolesIT());
+
+		NoCVProfile nocv = new NoCVProfile(noCVDTO.getTitulo(),
+				noCVDTO.getResumen(), ubicacion, dh, skills);
 
 		String oid = Constants.getRamdomId();
-		noCV.setOid(oid);
+		nocv.setOid(oid);
 
-		this.getDao().saveNoCVProfile(noCV);
+		// SE ACTIVA EL USUARIO
+		user.setActivo(true);
+		user.setNoCVProfile(nocv);
+		
+		UserDTO dto = DTOFactory.createDTOForUser(user);
 
-		// FIXME
-		return true;
+		return dto;
+	}
+
+	public NoCVPublicProfileDTO getPublicProfileByUserId(String userOid) {
+		User user = this.getDao().findUserById(userOid);
+		NoCVPublicProfileDTO dto = DTOFactory
+				.createDTOForNoCVPublicProfile(user);
+
+		return dto;
+
+	}
+
+	public List<DisponibilidadHorariaDTO> getAllDisponibilidadHorariaTypes() {
+		List<DisponibilidadHoraria> types = this.getDao()
+				.findAllDisponibilidadHoraria();
+		List<DisponibilidadHorariaDTO> dtos = DTOFactory
+				.createDTOForDisponibilidadHorariaTypes(types);
+
+		return dtos;
 	}
 
 }
