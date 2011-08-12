@@ -16,7 +16,7 @@ public class HeaderPanel extends BasePanel {
 
 	private void initGui() {
 		add(new BookmarkablePageLink("newUserLink", NewUserPage.class));
-		add(new BookmarkablePageLink("profileLink", UpdateNoCVProfilePage.class,  new PageParameters("user=1")));
+		add(new BookmarkablePageLink("profileLink", UpdateNoCVProfilePage.class,  new PageParameters("user=2")));
 
 	}
 		

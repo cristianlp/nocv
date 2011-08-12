@@ -50,7 +50,7 @@ public class DTOFactory {
 
 		dto.setDisponibilidadHorariaType(createDTOForDisponibilidadHorariaType(nocv
 				.getDisponibilidadHorariaType()));
-		dto.setNoCVProfileType(nocv.getNoCVProfileType());
+		dto.setNoCVType(nocv.getNoCVType());
 		dto.setObservaciones(nocv.getObservaciones());
 		dto.setResumen(nocv.getResumen());
 		dto.setSkills(createDTOForSkills(nocv.getSkills()));
@@ -64,9 +64,9 @@ public class DTOFactory {
 
 	}
 
-	private static Set<SkillDTO> createDTOForSkills(Set<Skill> skills) {
+	private static Collection<SkillDTO> createDTOForSkills(Collection<Skill> skills) {
 
-		Set<SkillDTO> result = new HashSet<SkillDTO>();
+		Collection<SkillDTO> result = new ArrayList<SkillDTO>();
 
 		for (Iterator<Skill> iterator = skills.iterator(); iterator.hasNext();) {
 			Skill skill = iterator.next();
@@ -79,7 +79,7 @@ public class DTOFactory {
 	public static NoCVPublicProfileDTO createDTOForNoCVPublicProfile(User user) {
 		NoCVProfile nocv = user.getNoCVProfile();
 		NoCVPublicProfileDTO dto = new NoCVPublicProfileDTO(user.getUsername(),
-				nocv.getTitulo(), nocv.getResumen(), nocv.getObservaciones(),
+				nocv.getTitulo(), nocv.getResumen(), nocv.getNoCVType(), nocv.getObservaciones(),
 				nocv.getSkills(), nocv.getDisponibilidadHorariaType());
 
 		return dto;

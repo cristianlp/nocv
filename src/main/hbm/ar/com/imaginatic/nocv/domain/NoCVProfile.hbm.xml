@@ -17,10 +17,11 @@
 
 
 		<many-to-one name="ubicacion" class="Ubicacion" column="UBICACION_ID"
-			not-null="true" />
+			not-null="true" cascade="all" />
 
 		<many-to-one name="disponibilidadHorariaType" class="DisponibilidadHoraria"
 			column="DISPONIBILIDADHORARIA_ID" not-null="true" />
+		
 		<many-to-one name="noCVType" class="NoCVType" column="NOCVTYPE_ID"
 			not-null="true" />
 
@@ -29,7 +30,7 @@
 
 
 		<bag name="skills" table="SKILL" lazy="extra" cascade="all">
-			<key column="ID_NOCV" />
+			<key column="NOCV_ID" />
 			<one-to-many class="Skill" />
 		</bag>
 

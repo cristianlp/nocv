@@ -8,6 +8,8 @@ public class Ubicacion {
 	private String ciudad;
 	private String observaciones;
 
+	
+	public Ubicacion() {}
 	public Ubicacion(String pais, String ciudad) {
 		this(pais, ciudad, null);
 	}

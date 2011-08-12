@@ -1,12 +1,13 @@
 package ar.com.imaginatic.nocv.persistence.dao.hibernate;
 
-import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVProfile;
+import ar.com.imaginatic.nocv.domain.NoCVType;
 import ar.com.imaginatic.nocv.domain.NoCVWorld;
 import ar.com.imaginatic.nocv.domain.User;
 import ar.com.imaginatic.nocv.util.Constants;
@@ -28,6 +29,10 @@ public class NoCVDao extends HibernateDaoSupport implements INoCVDao {
 	public NoCVProfile findNoCVProfileById(String oid) {
 		return (NoCVProfile) getHibernateTemplate().get(NoCVProfile.class, oid);
 	}
+	
+	public NoCVType findNoCVType(String oid) {
+		return (NoCVType) getHibernateTemplate().get(NoCVType.class, oid);
+	}
 
 	// The NOCV World ******************************************************************************************
 	
@@ -48,9 +53,13 @@ public class NoCVDao extends HibernateDaoSupport implements INoCVDao {
 
 	public List<User> findAllActiveUsers() {
 
-		List<User> l = getHibernateTemplate().findByNamedQuery("findAllActiveUsers");
+		//List<User> l = getHibernateTemplate().findByNamedQuery("findAllActiveUsers");
+		
+		Query q = this.getSession().getNamedQuery("findAllActiveUsers");
+		
+		
 
-		return l;
+		return q.list();
 
 	}
 

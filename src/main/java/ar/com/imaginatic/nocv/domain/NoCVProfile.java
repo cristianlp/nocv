@@ -1,6 +1,9 @@
 package ar.com.imaginatic.nocv.domain;
 
+import java.util.Collection;
 import java.util.Set;
+
+import ar.com.imaginatic.nocv.util.Constants;
 
 /*
  * Las instancias de esta clase representan el perfil "liviano" (no formal) de un usuario (instancia de la clase User)
@@ -18,7 +21,7 @@ public class NoCVProfile {
 	private String resumen;
 
 	// Funcionan como descriptores del perfil del usuario
-	private Set<Skill> skills;
+	private Collection<Skill> skills;
 
 	// La disponibilidad horaria del usuario
 	// private DisponibilidadHoraria_Enum disponibilidadHorariaType;
@@ -41,23 +44,28 @@ public class NoCVProfile {
 	// Texto libre para completar el perfil
 	private String observaciones;
 
+	
+	public NoCVProfile() {}
+	
 	// Se construye el objeto con los atributos obligatorios
-	public NoCVProfile(String titulo, String resumen, Ubicacion ubicacion,
-			DisponibilidadHoraria disponibilidadHoraria, Set<Skill> skills) {
+	public NoCVProfile(String titulo, String resumen, NoCVType type,
+			Ubicacion ubicacion, DisponibilidadHoraria disponibilidadHoraria,
+			Collection<Skill> skills) {
 		this.skills = skills;
 		this.titulo = titulo;
 		this.resumen = resumen;
+		this.noCVType = type;
 		this.ubicacion = ubicacion;
 		this.disponibilidadHorariaType = disponibilidadHoraria;
+		
+		this.oid=Constants.getRamdomId();
 	}
 
 	public String getOid() {
 		return oid;
 	}
 
-	public void setOid(String oid) {
-		this.oid = oid;
-	}
+
 
 	public boolean isMeInteresaParticiparEnProyectosLibres() {
 		return meInteresaParticiparEnProyectosLibres;
@@ -104,13 +112,7 @@ public class NoCVProfile {
 		skills.add(skill);
 	}
 
-	public Set<Skill> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(Set<Skill> skills) {
-		this.skills = skills;
-	}
+	
 
 	public Ubicacion getUbicacion() {
 		return ubicacion;
@@ -129,20 +131,24 @@ public class NoCVProfile {
 		this.disponibilidadHorariaType = disponibilidadHorariaType;
 	}
 
-	public NoCVType getNoCVProfileType() {
-		return noCVType;
-	}
-
-	public void setNoCVProfileType(NoCVType noCVProfileType) {
-		this.noCVType = noCVProfileType;
-	}
-
 	public NoCVType getNoCVType() {
 		return noCVType;
 	}
 
 	public void setNoCVType(NoCVType noCVType) {
 		this.noCVType = noCVType;
+	}
+
+	public Collection<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Collection<Skill> skills) {
+		this.skills = skills;
+	}
+
+	public void setOid(String oid) {
+		this.oid = oid;
 	}
 
 }

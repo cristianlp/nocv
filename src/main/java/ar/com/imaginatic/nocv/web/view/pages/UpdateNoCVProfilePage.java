@@ -52,9 +52,9 @@ public class UpdateNoCVProfilePage extends BasePage {
 				else
 					user = getNoCVSession().getUser();
 
-				System.out.println("USUARIO -->" + user.getUsername());
-				
-							
+				//FIXME TEST
+				nocv.setCiudad("mdq");
+				nocv.setPais("arg");
 				
 				
 				UserDTO userDTO = getNoCVService().addNoCVProfile(user.getOid(), nocv);

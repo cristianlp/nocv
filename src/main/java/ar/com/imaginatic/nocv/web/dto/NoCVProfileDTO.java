@@ -1,12 +1,8 @@
 package ar.com.imaginatic.nocv.web.dto;
 
-import java.util.Set;
+import java.util.Collection;
 
-import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVType;
-import ar.com.imaginatic.nocv.domain.RoleIT;
-import ar.com.imaginatic.nocv.domain.Skill;
-import ar.com.imaginatic.nocv.domain.Ubicacion;
 
 public class NoCVProfileDTO {
 
@@ -14,13 +10,13 @@ public class NoCVProfileDTO {
 
 	private String titulo;
 	private String resumen;
-	private Set<SkillDTO> skills;
+	private Collection<SkillDTO> skills;
 
 	private DisponibilidadHorariaDTO disponibilidadHorariaType;
-	private NoCVType noCVProfileType;
-	private Set<RoleITDTO> rolesIT;
+	private NoCVType noCVType;
+	// private Set<RoleITDTO> rolesIT;
 
-	//UBICACION
+	// UBICACION
 	private String pais;
 	private String ciudad;
 	private String observacionesUbicacion;
@@ -68,32 +64,6 @@ public class NoCVProfileDTO {
 		this.disponibilidadHorariaType = disponibilidadHorariaType;
 	}
 
-	public NoCVType getNoCVProfileType() {
-		return noCVProfileType;
-	}
-
-	public void setNoCVProfileType(NoCVType noCVProfileType) {
-		this.noCVProfileType = noCVProfileType;
-	}
-
-	public Set<SkillDTO> getSkills() {
-		return skills;
-	}
-
-	public void setSkills(Set<SkillDTO> skills) {
-		this.skills = skills;
-	}
-
-	public Set<RoleITDTO> getRolesIT() {
-		return rolesIT;
-	}
-
-	public void setRolesIT(Set<RoleITDTO> rolesIT) {
-		this.rolesIT = rolesIT;
-	}
-
-
-
 	public String getPais() {
 		return pais;
 	}
@@ -116,6 +86,22 @@ public class NoCVProfileDTO {
 
 	public void setObservacionesUbicacion(String observacionesUbicacion) {
 		this.observacionesUbicacion = observacionesUbicacion;
+	}
+
+	public NoCVType getNoCVType() {
+		return noCVType;
+	}
+
+	public void setNoCVType(NoCVType noCVType) {
+		this.noCVType = noCVType;
+	}
+
+	public Collection<SkillDTO> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(Collection<SkillDTO> skills) {
+		this.skills = skills;
 	}
 
 }

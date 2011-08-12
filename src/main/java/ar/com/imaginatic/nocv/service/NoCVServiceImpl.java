@@ -9,12 +9,11 @@ import org.slf4j.LoggerFactory;
 
 import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVProfile;
-import ar.com.imaginatic.nocv.domain.RoleIT;
+import ar.com.imaginatic.nocv.domain.NoCVType;
 import ar.com.imaginatic.nocv.domain.Skill;
 import ar.com.imaginatic.nocv.domain.Ubicacion;
 import ar.com.imaginatic.nocv.domain.User;
 import ar.com.imaginatic.nocv.util.Constants;
-import ar.com.imaginatic.nocv.util.RoleITParser;
 import ar.com.imaginatic.nocv.util.SkillsParser;
 import ar.com.imaginatic.nocv.web.dto.DTOFactory;
 import ar.com.imaginatic.nocv.web.dto.DisponibilidadHorariaDTO;
@@ -43,6 +42,9 @@ public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService 
 
 	public Collection<UserDTO> getAllUsers() {
 		List<User> users = this.getDao().findAllActiveUsers();
+		
+		
+		
 		Collection<UserDTO> dtos = DTOFactory.createDTOForUsers(users);
 
 		return dtos;
@@ -54,9 +56,8 @@ public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService 
 
 		User user = this.getDao().findUserById(oid);
 
-		
-		//TODO CHEQUEAR NOCV != NULL
-		
+		// TODO CHEQUEAR NOCV != NULL
+
 		UserDTO dto = DTOFactory.createDTOForUser(user);
 
 		return dto;
@@ -71,21 +72,23 @@ public class NoCVServiceImpl extends AbstractNoCVService implements NoCVService 
 		DisponibilidadHoraria dh = this.getDao().findDisponibilidadHorariaById(
 				noCVDTO.getDisponibilidadHorariaType().getOid());
 
+		// FIXME
+		NoCVType type = this.getDao().findNoCVType("1");
+
 		Ubicacion ubicacion = new Ubicacion(noCVDTO.getPais(),
 				noCVDTO.getCiudad(), noCVDTO.getObservacionesUbicacion());
-		Set<Skill> skills = SkillsParser.parse(noCVDTO.getSkills());
-		//Set<RoleIT> roles = RoleITParser.parse(noCVDTO.getRolesIT());
+		ubicacion.setOid(Constants.getRamdomId());
+
+		Collection<Skill> skills = SkillsParser.parse(noCVDTO.getSkills());
+		// Set<RoleIT> roles = RoleITParser.parse(noCVDTO.getRolesIT());
 
 		NoCVProfile nocv = new NoCVProfile(noCVDTO.getTitulo(),
-				noCVDTO.getResumen(), ubicacion, dh, skills);
-
-		String oid = Constants.getRamdomId();
-		nocv.setOid(oid);
+				noCVDTO.getResumen(), type, ubicacion, dh, skills);
 
 		// SE ACTIVA EL USUARIO
 		user.setActivo(true);
 		user.setNoCVProfile(nocv);
-		
+
 		UserDTO dto = DTOFactory.createDTOForUser(user);
 
 		return dto;

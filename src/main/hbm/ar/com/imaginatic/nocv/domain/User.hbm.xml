@@ -17,7 +17,7 @@
 		<property name="email" column="email" length="100" />
 		<property name="activo" column="activo"  />
 		
-		<many-to-one name="noCVProfile" class="NoCVProfile" column="NOCV_ID" cascade="all"/>
+		<many-to-one name="noCVProfile" class="NoCVProfile" column="NOCV_ID" cascade="all" lazy="proxy"/>
 		
 		
 	</class>
@@ -25,7 +25,7 @@
 
 
     <query name="findAllActiveUsers">
-        <![CDATA[from User u where u.activo=true]]>
+        <![CDATA[select u from User u where u.activo=true]]>
     </query>
 
 </hibernate-mapping>

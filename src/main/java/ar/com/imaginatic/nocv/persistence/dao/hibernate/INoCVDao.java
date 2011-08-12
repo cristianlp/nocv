@@ -4,6 +4,7 @@ import java.util.List;
 
 import ar.com.imaginatic.nocv.domain.DisponibilidadHoraria;
 import ar.com.imaginatic.nocv.domain.NoCVProfile;
+import ar.com.imaginatic.nocv.domain.NoCVType;
 import ar.com.imaginatic.nocv.domain.NoCVWorld;
 import ar.com.imaginatic.nocv.domain.User;
 
@@ -20,6 +21,7 @@ public interface INoCVDao {
 	//NoCVProfile
 	public boolean saveNoCVProfile(NoCVProfile noCV);
 	public NoCVProfile findNoCVProfileById(String oid);
+	public NoCVType findNoCVType(String oid);
 
 
 	public List<DisponibilidadHoraria> findAllDisponibilidadHoraria();
